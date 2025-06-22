@@ -4,4 +4,14 @@
 
 body {
   @apply font-roboto;
+  overflow-x: hidden;
+}
+
+.custom-swiper .swiper-wrapper {
+  padding-bottom: 4rem;
+}
+
+.custom-swiper .swiper-pagination {
+  bottom: 0 !important;
+  top: auto !important;
 }
