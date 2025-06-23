@@ -26,7 +26,7 @@ const ProductTabBody = ({ currentTab }) => {
 
             <div>
               {product?.availabilityStatus === "In Stock" ? (
-                <span className="mb-4 text-[13px] text-green-600">
+                <span className="mb-1 block text-[13px] text-green-600">
                   Stock Available
                 </span>
               ) : (

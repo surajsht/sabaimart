@@ -3,7 +3,7 @@ import ProductTabHeader from "./ProductTabHeader";
 import ProductTabBody from "./ProductTabBody";
 
 const ProductTab = () => {
-  const [currentTab, setCurrentTab] = useState("all");
+  const [currentTab, setCurrentTab] = useState("home-decoration");
 
   return (
     <div className="container mt-12">

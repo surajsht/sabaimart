@@ -1,3 +1,4 @@
+import Blogs from "../components/Blogs";
 import Cta from "../components/Cta";
 import FeaturedCategory from "../components/FeaturedCategory";
 import FeaturedProducts from "../components/FeaturedProducts";
@@ -16,6 +17,7 @@ const Home = () => {
       <Cta />
       <ProductTab />
       <Testimonial />
+      <Blogs />
     </>
   );
 };

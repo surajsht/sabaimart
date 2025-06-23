@@ -27,7 +27,7 @@ const Testimonial = () => {
           640: {
             slidesPerView: 2,
           },
-          768: {
+          1024: {
             slidesPerView: 3,
           },
         }}

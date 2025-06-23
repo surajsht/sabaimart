@@ -36,24 +36,20 @@ const FeaturedProducts = () => {
             slidesPerView: 4,
             spaceBetween: 24,
           },
-          1536: {
-            slidesPerView: 6,
-            spaceBetween: 40,
-          },
         }}
         className="custom-swiper"
       >
         {data.map((item) => {
           return (
             <SwiperSlide key={item?.id}>
-              <div className="relative">
+              <div className="relative bg-gray-100 mb-2">
                 <img
                   src={item?.thumbnail}
                   alt={item?.title || "product-image"}
                   className="h-72 w-full rounded-lg object-contain"
                 />
                 {item?.discountPercentage > 0 && (
-                  <span className="absolute left-2 top-2 rounded bg-red-500 px-2 py-1 text-xs text-white">
+                  <span className="absolute left-4 top-4 rounded bg-red-500 px-2 py-1 text-xs text-white">
                     {Math.floor(item?.discountPercentage)}% OFF
                   </span>
                 )}
@@ -61,22 +57,22 @@ const FeaturedProducts = () => {
 
               <div>
                 {item?.availabilityStatus === "In Stock" ? (
-                  <span className="mb-2 text-sm text-green-600">
+                  <span className="mb-1 text-[13px] block text-green-600">
                     Stock Available
                   </span>
                 ) : (
-                  <span className="mb-2 text-sm text-red-500">
+                  <span className="mb-1 text-[13px] block text-red-500">
                     Out Of Stock
                   </span>
                 )}
 
-                <h3 className="font-sm mb-1 font-poppins text-lg">
+                <h3 className="font-bold mb-2 font-poppins text-sm tracking-wide">
                   {item?.title}
                 </h3>
 
                 <div className="flex">
-                  <span className="mr-1 align-top font-bold">$</span>
-                  <span className="text-2xl font-bold">{item?.price}</span>
+                  <span className="mr-1 text-xs align-top font-semibold">$</span>
+                  <span className="text-sm font-semibold">{item?.price}</span>
                 </div>
               </div>
             </SwiperSlide>
