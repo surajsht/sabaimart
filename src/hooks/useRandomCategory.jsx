@@ -13,6 +13,7 @@ const useRandomCategory = () => {
   return useQuery({
     queryKey: ["category"],
     queryFn: fetchCategory,
+     staleTime: 1000 * 60 * 5,
   });
 };
 

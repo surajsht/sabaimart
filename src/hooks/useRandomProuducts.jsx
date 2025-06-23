@@ -13,6 +13,7 @@ const useRandomProuducts = () => {
   return useQuery({
     queryKey: ["randomProduct"],
     queryFn: fetchProducts,
+    staleTime: 1000 * 60 * 5,
   });
 };
 

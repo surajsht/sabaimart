@@ -62,12 +62,10 @@ const FeaturedProducts = () => {
               <div>
                 {item?.availabilityStatus === "In Stock" ? (
                   <span className="mb-2 text-sm text-green-600">
-                    {" "}
                     Stock Available
                   </span>
                 ) : (
                   <span className="mb-2 text-sm text-red-500">
-                    {" "}
                     Out Of Stock
                   </span>
                 )}
