@@ -1,4 +1,5 @@
 import useProductTab from "../../hooks/useProductTab";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ProductTabBody = ({ currentTab }) => {
   const { data, isLoading, error } = useProductTab(currentTab);
@@ -10,12 +11,19 @@ const ProductTabBody = ({ currentTab }) => {
     <div className="flex flex-col gap-6 sm:flex-row sm:flex-wrap">
       {data.map((product) => {
         return (
-          <div key={product?.id} className="sm:w-[calc(50%-12px)] lg:w-[calc(33.333333%-16px)]">
-            <div className="relative mb-2 bg-gray-100">
-              <img
-                src={product?.thumbnail}
+          <div
+            key={product?.id}
+            className="sm:w-[calc(50%-12px)] lg:w-[calc(33.333333%-16px)]"
+          >
+            <div className="relative mb-2 bg-gray-100 rounded-lg h-72">
+              <LazyLoadImage
                 alt={product?.title || "product-image"}
-                className="h-72 w-full rounded-lg object-contain"
+                src={product?.thumbnail}
+                height="100%"
+                width="100%"
+                effect="blur"
+                placeholderSrc="/fallback.jpg"
+                className="h-full w-full rounded-lg object-contain"
               />
               {product?.discountPercentage > 0 && (
                 <span className="absolute left-4 top-4 rounded bg-red-500 px-2 py-1 text-xs text-white">
@@ -35,7 +43,7 @@ const ProductTabBody = ({ currentTab }) => {
                 </span>
               )}
 
-              <h3 className="font-bold tracking-wide mb-2 font-poppins text-sm">
+              <h3 className="mb-2 font-poppins text-sm font-bold tracking-wide">
                 {product?.title}
               </h3>
 

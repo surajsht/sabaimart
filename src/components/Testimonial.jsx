@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { TestimonialData } from "../constants/TestimonialData";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Testimonial = () => {
   return (
@@ -43,13 +44,26 @@ const Testimonial = () => {
                 <h2 className="mb-2 font-poppins text-lg font-medium">
                   {title}
                 </h2>
-                <p className="text-sm leading-normal mb-4"> {description} </p>
+                <p className="mb-4 text-sm leading-normal"> {description} </p>
 
                 <div className="flex items-center gap-4">
-                  <img src={imageUrl} alt="author" className="h-20 w-h-20 rounded-full" />
+                  <div className="w-h-20 h-20">
+                    <LazyLoadImage
+                      alt="author"
+                      src={imageUrl}
+                      height="100%"
+                      width="100%"
+                      effect="blur"
+                      placeholderSrc="/fallback.jpg"
+                      className="w-h-full h-full rounded-full object-cover"
+                    />
+                  </div>
 
                   <div>
-                    <h3 className="text-lg font-medium font-poppins"> {username} </h3>
+                    <h3 className="font-poppins text-lg font-medium">
+                      {" "}
+                      {username}{" "}
+                    </h3>
                     <span className="text-sm"> {position} </span>
                   </div>
                 </div>

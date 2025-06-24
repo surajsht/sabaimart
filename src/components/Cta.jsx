@@ -1,11 +1,19 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 const Cta = () => {
   return (
     <div className="relative mt-12">
-      <img
-        src="/cta.webp"
-        alt="call to action"
-        className="absolute left-0 right-0 top-0 z-0 h-full w-full object-cover"
-      />
+      <div className="absolute left-0 right-0 top-0 z-0 h-full w-full">
+        <LazyLoadImage
+          alt="call to action"
+          src="/cta.webp"
+          height="100%"
+          width="100%"
+          effect="blur"
+          placeholderSrc="/fallback.jpg"
+          className="h-full w-full object-cover"
+        />
+      </div>
 
       <div className="container relative flex flex-col items-end py-32 2xl:py-40">
         <div className="flex flex-col items-start gap-4 md:w-3/4 lg:w-3/5 xl:w-1/2 2xl:gap-6">

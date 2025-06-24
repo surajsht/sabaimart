@@ -2,6 +2,7 @@ import { BlogData } from "../constants/BlogData";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Blogs = () => {
   return (
@@ -52,11 +53,18 @@ const Blogs = () => {
           return (
             <SwiperSlide key={id}>
               <article>
-                <img
-                  src={image}
-                  alt={title}
-                  className="mb-2 h-64 w-full object-cover"
-                />
+                <div className="mb-2 h-64 w-full">
+                  <LazyLoadImage
+                    alt={title}
+                    src={image}
+                    height="100%"
+                    width="100%"
+                    effect="blur"
+                    placeholderSrc="/fallback.jpg"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+
                 <h2 className="mb-2 font-poppins text-lg font-semibold leading-tight tracking-normal">
                   {title}
                 </h2>

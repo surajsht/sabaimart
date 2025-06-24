@@ -1,6 +1,7 @@
 import useRandomProuducts from "../hooks/useRandomProuducts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const FeaturedProducts = () => {
   const { data, isLoading, error } = useRandomProuducts();
@@ -42,11 +43,15 @@ const FeaturedProducts = () => {
         {data.map((item) => {
           return (
             <SwiperSlide key={item?.id}>
-              <div className="relative bg-gray-100 mb-2">
-                <img
-                  src={item?.thumbnail}
+              <div className="relative mb-2 rounded-lg bg-gray-100 h-80 w-full">
+                <LazyLoadImage
                   alt={item?.title || "product-image"}
-                  className="h-72 w-full rounded-lg object-contain"
+                  src={item?.thumbnail}
+                  height="100%"
+                  width="100%"
+                  effect="blur"
+                  placeholderSrc="/fallback.jpg"
+                  className="h-full w-full object-cover"
                 />
                 {item?.discountPercentage > 0 && (
                   <span className="absolute left-4 top-4 rounded bg-red-500 px-2 py-1 text-xs text-white">
@@ -57,21 +62,23 @@ const FeaturedProducts = () => {
 
               <div>
                 {item?.availabilityStatus === "In Stock" ? (
-                  <span className="mb-1 text-[13px] block text-green-600">
+                  <span className="mb-1 block text-[13px] text-green-600">
                     Stock Available
                   </span>
                 ) : (
-                  <span className="mb-1 text-[13px] block text-red-500">
+                  <span className="mb-1 block text-[13px] text-red-500">
                     Out Of Stock
                   </span>
                 )}
 
-                <h3 className="font-bold mb-2 font-poppins text-sm tracking-wide">
+                <h3 className="mb-2 font-poppins text-sm font-bold tracking-wide">
                   {item?.title}
                 </h3>
 
                 <div className="flex">
-                  <span className="mr-1 text-xs align-top font-semibold">$</span>
+                  <span className="mr-1 align-top text-xs font-semibold">
+                    $
+                  </span>
                   <span className="text-sm font-semibold">{item?.price}</span>
                 </div>
               </div>

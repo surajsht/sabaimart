@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./output.css";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const client = new QueryClient();
 

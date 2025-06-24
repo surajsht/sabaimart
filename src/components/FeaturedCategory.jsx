@@ -2,6 +2,7 @@ import useRandomCategory from "../hooks/useRandomCategory";
 import { CategoryImages } from "../constants/CategoryImages";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const FeaturedCategory = () => {
   const { data, isLoading, error } = useRandomCategory();
@@ -44,11 +45,18 @@ const FeaturedCategory = () => {
           return (
             <SwiperSlide key={item?.slug}>
               <div className="flex flex-col items-center">
-                <img
-                  src={CategoryImages[item.slug]}
-                  alt={item?.slug || "category image"}
-                  className="mx-auto h-44 w-44 object-contain"
-                />
+                <div className="relative mb-2 h-44 w-full rounded-lg bg-gray-100">
+                  <LazyLoadImage
+                    alt={item?.slug || "category image"}
+                    src={CategoryImages[item.slug]}
+                    height="100%"
+                    width="100%"
+                    effect="blur"
+                    placeholderSrc="/fallback.jpg"
+                    className="mx-auto h-full w-full object-contain"
+                  />
+                </div>
+
                 <h2 className="mt-4 text-center text-xl font-medium">
                   {item?.name}
                 </h2>

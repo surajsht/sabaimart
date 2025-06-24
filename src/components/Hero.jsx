@@ -1,13 +1,17 @@
-import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Hero = () => {
   return (
     <section className="h-[600px] w-screen">
       <div className="container relative flex h-full items-center justify-start overflow-hidden rounded-2xl">
         <div className="absolute left-0 right-0 top-0 z-0 h-full w-full">
-          <img
-            src="/main-banner.webp"
+          <LazyLoadImage
             alt="SabaiMart Hero"
+            src="/main-banner.webp"
+            height="100%"
+            width="100%"
+            effect="blur"
+            placeholderSrc="/fallback.jpg"
             className="h-full w-full object-cover"
           />
         </div>
