@@ -1,11 +1,11 @@
 import { useState } from "react";
-import useBlog from "../../hooks/useBlog";
+import useBlogList from "../../hooks/useBlogList";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const BlogList = () => {
   const [pageSkip, setPageSkip] = useState(0);
 
-  const { data, isLoading, error } = useBlog(pageSkip);
+  const { data, isLoading, error } = useBlogList(pageSkip);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div> Error: {error.message} </div>;
@@ -21,7 +21,7 @@ const BlogList = () => {
   };
 
   const prevPage = () => {
-    if (pageSkip - limit > 0) {
+    if (pageSkip - limit >= 0) {
       setPageSkip((prev) => prev - limit);
     }
   };
@@ -35,7 +35,7 @@ const BlogList = () => {
               key={blog?.id}
               className="md:w-[calc(50%-12px)] lg:w-[calc(33.333333%-16px)] 2xl:w-[calc(25%-18px)]"
             >
-              <div className="mb-3 h-56 w-full">
+              <div className="mb-3 h-56 w-full overflow-hidden">
                 <LazyLoadImage
                   alt="thumbnail image"
                   src={blog?.image}
@@ -67,7 +67,7 @@ const BlogList = () => {
         <button
           className="transition disabled:cursor-not-allowed disabled:opacity-50 tracking-wide"
           onClick={prevPage}
-          disabled={pageSkip - limit <= 0}
+          disabled={pageSkip - limit < 0}
         >
           Prev
         </button>

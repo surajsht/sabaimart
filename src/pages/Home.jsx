@@ -4,6 +4,7 @@ import FeaturedCategory from "../components/FeaturedCategory";
 import FeaturedProducts from "../components/FeaturedProducts";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
+import Navbar from "../components/Navbar";
 import ProductTab from "../components/productTab/ProductTab";
 import Services from "../components/Services";
 import Testimonial from "../components/Testimonial";
@@ -11,6 +12,7 @@ import Testimonial from "../components/Testimonial";
 const Home = () => {
   return (
     <>
+      <Navbar />
       <Hero />
       <Services />
       <FeaturedCategory />

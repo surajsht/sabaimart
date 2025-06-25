@@ -13,7 +13,7 @@ const fetchBlog = async (pageSkip) => {
   return { resp, postWithImage };
 };
 
-const useBlog = (pageSkip) => {
+const useBlogList = (pageSkip) => {
   return useQuery({
     queryKey: ["blog", pageSkip],
     queryFn: () => fetchBlog(pageSkip),
@@ -21,4 +21,4 @@ const useBlog = (pageSkip) => {
   });
 };
 
-export default useBlog;
+export default useBlogList;
