@@ -61,8 +61,7 @@ const Testimonial = () => {
 
                   <div>
                     <h3 className="font-poppins text-lg font-medium">
-                      {" "}
-                      {username}{" "}
+                      {username}
                     </h3>
                     <span className="text-sm"> {position} </span>
                   </div>

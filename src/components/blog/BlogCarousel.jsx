@@ -1,10 +1,11 @@
-import { BlogData } from "../constants/BlogData";
+import { BlogData } from "../../constants/BlogData";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
 
-const Blogs = () => {
+const BlogCarousel = () => {
   return (
     <div className="container mt-12">
       <div className="mb-8 flex items-center justify-between gap-4">
@@ -18,7 +19,7 @@ const Blogs = () => {
         </div>
 
         <button className="flex items-center gap-2">
-          <span>All Blogs </span>
+          <Link to="/blog">All Blogs</Link>
           <MdKeyboardDoubleArrowRight />
         </button>
       </div>
@@ -78,4 +79,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default BlogCarousel;
