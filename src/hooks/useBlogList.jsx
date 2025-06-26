@@ -6,7 +6,7 @@ const fetchBlog = async (pageSkip) => {
     `https://dummyjson.com/posts?limit=10&skip=${pageSkip}`,
   );
 
-  const postWithImage = resp.data?.posts.map((post) => {
+  const postWithImage = resp?.data?.posts?.map((post) => {
     return { ...post, image: `https://picsum.photos/seed/${post.id}/600/400` };
   });
 

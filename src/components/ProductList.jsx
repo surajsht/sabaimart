@@ -1,42 +1,32 @@
-import { useEffect, useState } from "react";
 import useProductList from "../hooks/useProductList";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
+import usePagination from "../hooks/usePagination";
+import { Link } from "react-router-dom";
 
 const ProductList = ({ currentCategory }) => {
-  const [currentSkip, setCurrentSkip] = useState(0);
+  const { data, isLoading, error } = useProductList(currentCategory, 0);
+  const total = data?.total || 0;
+  const limit = 10;
 
-  const { data, isLoading, error } = useProductList(
-    currentCategory,
-    currentSkip,
+  const { currentSkip, currentPage, getNextPage, getPrevPage } = usePagination(
+    total,
+    limit,
+    [currentCategory],
   );
 
-  useEffect(() => {
-    setCurrentSkip(0);
-  }, [currentCategory]);
+  const {
+    data: pagedData,
+    isLoading: isPageLoading,
+    error: pageError,
+  } = useProductList(currentCategory, currentSkip);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
-  const total = data?.total;
-  const limit = 10;
-  const currentPage = Math.floor(currentSkip / limit) + 1;
-
-  const getNextPage = () => {
-    if (currentSkip + limit < total) {
-      setCurrentSkip((prev) => prev + limit);
-    }
-  };
-
-  const getPrevPage = () => {
-    if (currentSkip - limit >= 0) {
-      setCurrentSkip((prev) => prev - limit);
-    }
-  };
+  if (isPageLoading) return <div>Loading...</div>;
+  if (pageError) return <div>Error: {error.message}</div>;
 
   return (
     <>
       <div className="flex flex-wrap items-center gap-6 sm:flex-row">
-        {data?.products?.map((product) => {
+        {pagedData?.products?.map((product) => {
           return (
             <div
               key={product.id}
@@ -55,7 +45,9 @@ const ProductList = ({ currentCategory }) => {
               </div>
 
               <div className="mt-4">
-                <h3 className="mb-1 text-lg font-bold">{product.title}</h3>
+                <h3 className="mb-1 text-lg font-bold">
+                  <Link to={`/shop/${product.id}`}> {product.title} </Link>
+                </h3>
                 <p className="mb-2 text-sm text-gray-500">{product.brand}</p>
 
                 <div className="mb-2 flex items-center justify-between">
@@ -116,7 +108,7 @@ const ProductList = ({ currentCategory }) => {
           <button
             className="tracking-wide transition disabled:cursor-not-allowed disabled:opacity-50"
             onClick={getNextPage}
-            disabled={currentSkip + limit > total}
+            disabled={currentSkip + limit >= total}
           >
             Next
           </button>

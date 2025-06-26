@@ -1,35 +1,32 @@
 import { useState } from "react";
 import useBlogList from "../../hooks/useBlogList";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import usePagination from "../../hooks/usePagination";
 
 const BlogList = () => {
-  const [pageSkip, setPageSkip] = useState(0);
-
-  const { data, isLoading, error } = useBlogList(pageSkip);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div> Error: {error.message} </div>;
+  const { data, isLoading, error } = useBlogList(0);
 
   const total = data?.resp?.data?.total || 0;
   const limit = 10;
-  const currentPage = Math.floor(pageSkip / limit) + 1;
 
-  const nextPage = () => {
-    if (pageSkip + limit < total) {
-      setPageSkip((prev) => prev + limit);
-    }
-  };
+  const { currentSkip, currentPage, getNextPage, getPrevPage } = usePagination(
+    total,
+    limit,
+  );
 
-  const prevPage = () => {
-    if (pageSkip - limit >= 0) {
-      setPageSkip((prev) => prev - limit);
-    }
-  };
+  const {
+    data: blogData,
+    isLoading: isBlogLoading,
+    error: blogError,
+  } = useBlogList(currentSkip);
+
+  if (isBlogLoading) return <div>Loading...</div>;
+  if (blogError) return <div> Error: {blogError.message} </div>;
 
   return (
     <div>
       <main className="flex flex-col flex-wrap gap-6 md:flex-row">
-        {data?.postWithImage.map((blog) => {
+        {blogData?.postWithImage.map((blog) => {
           return (
             <article
               key={blog?.id}
@@ -65,19 +62,21 @@ const BlogList = () => {
 
       <div className="mt-8 flex items-center justify-center gap-6">
         <button
-          className="transition disabled:cursor-not-allowed disabled:opacity-50 tracking-wide"
-          onClick={prevPage}
-          disabled={pageSkip - limit < 0}
+          className="tracking-wide transition disabled:cursor-not-allowed disabled:opacity-50"
+          onClick={getPrevPage}
+          disabled={currentSkip - limit < 0}
         >
           Prev
         </button>
 
-        <span className="text-xl font-semibold font-poppins"> {currentPage} </span>
+        <span className="font-poppins text-xl font-semibold">
+          {currentPage}
+        </span>
 
         <button
-          className="transition disabled:cursor-not-allowed disabled:opacity-50 tracking-wide"
-          onClick={nextPage}
-          disabled={pageSkip + limit >= total}
+          className="tracking-wide transition disabled:cursor-not-allowed disabled:opacity-50"
+          onClick={getNextPage}
+          disabled={currentSkip + limit >= total}
         >
           Next
         </button>
