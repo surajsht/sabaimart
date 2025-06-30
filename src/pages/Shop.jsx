@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CategoryList from "../components/CategoryList";
 import Navbar from "../components/Navbar";
 import ProductList from "../components/ProductList";
@@ -7,6 +7,9 @@ import Footer from "../components/Footer";
 
 const Shop = () => {
   const [currentCategory, setCurrentCategory] = useState("all");
+  const [priceFilter, setPriceFilter] = useState(50000);
+  const [maxPrice, setMaxPrice] = useState(50000);
+  const [minPrice, setMinPrice] = useState(50000);
 
   return (
     <div>

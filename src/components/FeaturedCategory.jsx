@@ -3,6 +3,7 @@ import { CategoryImages } from "../constants/CategoryImages";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
 
 const FeaturedCategory = () => {
   const { data, isLoading, error } = useRandomCategory();
@@ -58,7 +59,7 @@ const FeaturedCategory = () => {
                 </div>
 
                 <h2 className="mt-4 text-center text-xl font-medium">
-                  {item?.name}
+                  <Link to="/shop" className="hover:text-blue-500">{item?.name}</Link>
                 </h2>
               </div>
             </SwiperSlide>

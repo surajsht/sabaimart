@@ -2,6 +2,7 @@ import useRandomProuducts from "../hooks/useRandomProuducts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
 
 const FeaturedProducts = () => {
   const { data, isLoading, error } = useRandomProuducts();
@@ -43,7 +44,7 @@ const FeaturedProducts = () => {
         {data.map((item) => {
           return (
             <SwiperSlide key={item?.id}>
-              <div className="relative mb-2 rounded-lg bg-gray-100 h-80 w-full">
+              <div className="relative mb-2 h-80 w-full rounded-lg bg-gray-100">
                 <LazyLoadImage
                   alt={item?.title || "product-image"}
                   src={item?.thumbnail}
@@ -72,7 +73,9 @@ const FeaturedProducts = () => {
                 )}
 
                 <h3 className="mb-2 font-poppins text-sm font-bold tracking-wide">
-                  {item?.title}
+                  <Link to={`/shop/${item.id}`} className="hover:text-blue-500">
+                    {item?.title}
+                  </Link>
                 </h3>
 
                 <div className="flex">

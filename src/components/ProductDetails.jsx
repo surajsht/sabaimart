@@ -3,14 +3,14 @@ import useSingleProduct from "../hooks/useSingleProduct";
 import { FaStar, FaShoppingCart, FaArrowLeft, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import Breadcrumb from "./Breadcrumb";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/slices/cartSlice";
-import Breadcrumb from "./Breadcrumb";
+import { addToWishList } from "../redux/slices/wishListSlice";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
-  const [wishlisted, setWishlisted] = useState(false);
-  const [imageId, setImageId] = useState(0);
+  const [imageId, getImageId] = useState(0);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,25 +23,13 @@ const ProductDetails = () => {
 
   const product = data?.data;
 
-  const incrementQty = () => {
-    setQuantity((prev) => prev + 1);
-  };
-
-  const decrementQty = () => {
-    if (quantity > 1) setQuantity((prev) => prev - 1);
-  };
-
-  const toggleWishlist = () => {
-    setWishlisted((prev) => !prev);
-  };
-
-  const getImageId = (id) => {
-    setImageId(id);
-  };
-
-  const handleAddToCart = () => {
+  const addProductToCart = () => {
     dispatch(addToCart({ ...product, quantity }));
   };
+  
+  const addProductToWishList = () => {
+    dispatch(addToWishList(product))
+  }
 
   return (
     <div className="container">
@@ -135,15 +123,15 @@ const ProductDetails = () => {
 
           <div className="mt-6 flex items-center gap-3">
             <button
-              onClick={decrementQty}
               className="rounded border px-3 py-1 text-lg font-bold text-gray-600"
+              onClick={() => setQuantity((prev) => prev - 1)}
             >
               -
             </button>
             <span className="text-base">{quantity}</span>
             <button
-              onClick={incrementQty}
               className="rounded border px-3 py-1 text-lg font-bold text-gray-600"
+              onClick={() => setQuantity((prev) => prev + 1)}
             >
               +
             </button>
@@ -152,22 +140,18 @@ const ProductDetails = () => {
           <div className="mt-6 flex items-center gap-4">
             <button
               className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
-              onClick={handleAddToCart}
+              onClick={addProductToCart}
             >
               <FaShoppingCart />
               Add to Cart
             </button>
 
             <button
-              onClick={toggleWishlist}
-              className={`flex items-center gap-2 rounded-lg border px-4 py-2 transition ${
-                wishlisted
-                  ? "border-red-500 text-red-500"
-                  : "border-gray-300 text-gray-600 hover:border-red-500 hover:text-red-500"
-              }`}
+              className={`flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-gray-600 transition hover:border-red-500 hover:text-red-500`}
+              onClick={addProductToWishList}
             >
               <FaHeart />
-              {wishlisted ? "Wishlisted" : "Add to Wishlist"}
+              Add to Wishlist
             </button>
           </div>
         </div>

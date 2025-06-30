@@ -4,6 +4,7 @@ import Blog from "./pages/Blog";
 import Shop from "./pages/Shop";
 import SingleProduct from "./pages/SingleProduct";
 import Cart from "./pages/Cart";
+import WishList from "./pages/WishList";
 
 const App = () => {
   return (
@@ -14,6 +15,8 @@ const App = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/wishList" element={<WishList />} />
+
       </Routes>
     </>
   );

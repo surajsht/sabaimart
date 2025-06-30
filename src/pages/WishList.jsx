@@ -1,16 +1,16 @@
-import Breadcrumb from "../components/Breadcrumb";
-import CartDetails from "../components/cart/CartDetails";
+import FeaturedProducts from "../components/FeaturedProducts";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import FeaturedProducts from "../components/FeaturedProducts";
+import Breadcrumb from "../components/Breadcrumb";
+import WishListDetails from "../components/WishListDetails";
 
-const Cart = () => {
+const WishList = () => {
   return (
     <>
       <Navbar />
       <div className="container">
         <Breadcrumb />
-        <CartDetails />
+        <WishListDetails />
       </div>
       <FeaturedProducts />
       <Footer />
@@ -18,4 +18,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default WishList;
